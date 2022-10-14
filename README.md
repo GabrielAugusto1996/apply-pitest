@@ -1,40 +1,40 @@
-**Hello World**, sejam bem vindos ao meu artigo relacionado à testes de mutação.
+**Hello World**, welcome to my article related to mutation testing.
 
-## Agradecimentos especiais:
+## Special thanks:
 
-Antes de iniciarmos, gostaria muito de agradecer ao meu amigo de trabalho [**Paulo Ricardo**](https://www.linkedin.com/in/pricardoti/) pelo incentivo de estar escrevendo esse artigo e poder compartilhar a minha visão dessa ferramenta com o restante de vocês.
+Before we start, I would like to thank my friend [**Paulo Ricardo**](https://www.linkedin.com/in/pricardoti/) for the encouragement of writing this article and being able to share my vision of this tool with the rest of you.
 
-## Afinal, o que é o Teste de Mutação?
+## What is Mutation Testing anyway?
 
-![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/74xrpgja3vl50ijpvxfx.png) 
+![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/74xrpgja3vl50ijpvxfx.png)
 
-O Pitest faz uma mutação no seu projeto, ele permite que você garanta uma margem de cobertura real dentro dos seus testes fazendo uma “cópia” do projeto e inserindo erros para ver se o seus testes irão falhar após a mutação. Quando o teste falha o mutante é morto. Caso algum mutante sobreviva isso significa que você precisa fazer mais testes unitários, os mutantes vivos servem de input para criar mais testes.
+Pitest makes a mutation in your project, it allows you to guarantee a real margin of coverage within your tests by making a “copy” of the project and inserting errors to see if your tests will fail after the mutation. When the test fails the mutant is killed. If any mutant survives this means you need to do more unit tests, the live mutants serve as input to create more tests.
 
-## Ok, mas como isso me ajuda com a qualidade do meu código?
+## Okay, but how does this help me with the quality of my code?
 
-![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lswmr2pp6tnea5hs8k1n.png) 
+![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/lswmr2pp6tnea5hs8k1n.png)
 
-Devido as clássicas correrias que os desenvolvedores precisam entrar para entregar um determinado projeto, acaba que o teste é feito mais para poder aumentar a cobertura do código, só que isso não é o correto, os testes vem com o objetivo de fornecer mais a qualidade do que você está entregando para algum cliente ou consumidor e também documentar para que outro desenvolvedor entenda melhor o seu código, mais pra frente vocês irão entender em que ponto quero chegar :)
+Due to the classic rush that developers need to get into to deliver a particular project, testing is done more in order to increase code coverage, but this is not correct, testing comes with the objective of providing more quality that you are delivering to a client or consumer and also documenting so that another developer can better understand your code, later on you will understand where I want to go :)
 
-## Quais tecnologias iremos utilizar?
+## What technologies will we use?
 
-![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gwddh9mzr7fub83gdvag.png) 
+![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gwddh9mzr7fub83gdvag.png)
 
-Para esse artigo em questão, iremos precisar ter as seguintes tecnologias no nosso projeto:
+For this article, we will need to have the following technologies in our project:
 
-1. [Java 8+](https://www.java.com/pt-BR/download/help/whatis_java.html): Linguagem de Programação Java na versão 8+
-2. [Junit 5](https://junit.org/junit5/): Framework para desenvolvimento de testes
-3. [Maven](https://maven.apache.org/): Ferramenta de automação para compilação
-4. [Pitest](https://pitest.org/): Ferramenta para realizar os testes mutantes
-5. [Spring](https://spring.io/): Framework de programação
+1. [Java 8+](https://www.java.com/pt-BR/download/help/whatis_java.html): Java Programming Language in version 8+
+2. [Junit 5](https://junit.org/junit5/): Test development framework
+3. [Maven](https://maven.apache.org/): Build automation tool
+4. [Pitest](https://pitest.org/): Tool to perform mutant tests
+5. [Spring](https://spring.io/): programming framework
 
-Não irei entrar muito a dentro de todas as tecnologias utilizadas pois não é o nosso objetivo desse artigo.
+I will not go into too much into all the technologies used because it is not our purpose of this article.
 
-## Configurando o nosso projeto:
+## Setting up our project:
 
-![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vc5dbouy55a2xq6iyn5z.png) 
+![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vc5dbouy55a2xq6iyn5z.png)
 
-Para que possamos utilizaf o **pitest**, precisamos fazer o uso do Junit 4 ou superior, mas como foi dito anteriormente, iremos utilizar o **Junit5**:
+In order for us to use **pitest**, we need to use Junit 4 or higher, but as mentioned earlier, we will use **Junit5**:
 
 ```xml
 <dependency>
@@ -56,7 +56,7 @@ Para que possamos utilizaf o **pitest**, precisamos fazer o uso do Junit 4 ou su
     <scope>test</scope>
 </dependency>
 ```
-Também será necessário que a gente adicione no nosso projeto o plugin do **pitest** que é o objetivo principal do nosso artigo:
+It will also be necessary for us to add the **pitest** plugin to our project, which is the main objective of our article:
 
 ```xml
             <plugin>
@@ -72,120 +72,126 @@ Também será necessário que a gente adicione no nosso projeto o plugin do **pi
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>SeuPacoteDeClasse.*</param>
+                        <param>YourClassPackage.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>SeuPacoteDeTeste.*</param>
+                        <param>YourTestPackage.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
 ```
-**Observação**: Existem outras configurações que você pode inserir no plugin conforme a sua preferência, como por exemplo, excluir uma determinada classe ou pacote que não irá ser testado:
+**Note**: There are other settings that you can insert in the plugin according to your preference, such as excluding a certain class or package that will not be tested:
 
 ```xml
 <excludedClasses>
- <param>PacoteDasSuasClasses.*</param>
- <param>PacoteDasSuasClasses.SouUmaClasse</param>
+ <param>PackageOfYourClasses.*</param>
+ <param>PackageOfYourClasses.IamAClass</param>
 </excludedClasses>
 ```
-Só espero que você não exclua o projeto inteiro, ok? :D
+I just hope you don't delete the entire project, ok? :D
 
-## Revelando a falha de fazer teste apenas para cobertura:
+## Revealing the failure to test for coverage only:
 
 ![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9txnkmi5av2hmkoojqoq.png)
 
-Conforme foi dito anteriormente, devido à alguma correria ou até mesmo por falta de conhecimento, o desenvolvedor costuma fazer o teste apenas pela cobertura ou acaba esquecendo de inserir alguma validação importante, então vamos analisar o seguinte cenário:
+As mentioned earlier, due to some rush or even lack of knowledge, the developer usually does the test just for coverage or ends up forgetting to insert some important validation, so let's analyze the following scenario:
 
-- Dentro do nosso projeto temos uma classe chamada **UsuarioTranslator**
+- Inside our project we have a class called **UserFactory**
 
-- No nosso método receberemos como parâmetros uma String(nome) e um Integer(idade)
+- In our method we will receive as parameters a String(name) and an Integer(year)
 
-- Após isso iremos fazer a instância da classe **Usuario** e iremos settar os parâmetros recebidos em seus respectivos atributos
+- After that we will make the instance of the **User** class and we will set the parameters received in their respective attributes
 
-- Logo em seguida, iremos retornar o user
+- Soon after, we will return the user
 
 ```java
-public final class UsuarioTranslator {
+public final class UserFactory {
 
-    private UsuarioTranslator() {}
+    private UserFactory() {}
     
-    public static Usuario of(final String nome, final Integer idade) {
-        final Usuario user = new Usuario();
+    public static User create(final String name, final Integer year) {
+        final User user = new User();
         
-        user.setNome(nome);
-        user.setIdade(idade);
+        user.setName(name);
+        user.setYear(year);
         
         return user;
     }
 }
 ```
-Ok, após entendermos o objetivo do nosso método, vamos para a nossa classe de teste, **UsuarioTranslatorTest**:
+
+Okay, after we understand the purpose of our method, let's go to our test class, **UserFactoryTest**:
+
 ```java
-class UsuarioTranslatorTest {
+class UserFactoryTest {
 
     @Test
-    @DisplayName("Deverá retornar Usuario - Quando sucesso")
-    void of_Usuario_QuandoSucesso() {
-        final Integer idade = 10;
-        final String nome = "Dudu";
+    @DisplayName("Should return a User - When success")
+    void create_User_WhenSuccess() {
+        final Integer year = 10;
+        final String name = "Dudu";
 
-        final Usuario user = UsuarioTranslator.of(nome, idade);
+        final User user = UserFactory.create(name, year);
 
         Assertions.assertNotNull(user);
-        Assertions.assertEquals(nome, user.getNome());
+        Assertions.assertEquals(name, user.getName());
     }
 }
 ```
-Como podemos ver, fizemos a chamada do método da nossa classe e fizemos as seguintes verificações:
-- Verificamos que o objeto de retorno não está nulo 
-- Verificamos que *nome** esperado é igual ao nome informado no **user**
 
-Vamos conferir a nossa cobertura?
+As we can see, we made the method call of our class and made the following checks:
+- We check that the return object is not null
+- We verified that *expected name** is equal to the name entered in **user**
 
-![Captura de tela de 2021-03-16 23-31-44](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/0p5429d58pj15pnawxl5.png)
+Shall we check out our coverage?
 
-Mas afinal, nesse exemplo simples não tivemos nenhum problema, onde estava o nosso erro?
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tg8skzk1lhyiqk87i88e.png)
 
-Exatamente, esquecemos de fazer a validação se o atributo de **idade** foi settado corretamente, vamos ver o que o **Pitest** tem a dizer?
+But after all, in this simple example we had no problem, where was our mistake?
 
-## Entrando mais na ferramenta:
+Exactly, we forgot to do the validation if the **year** attribute was set correctly, let's see what the **Pitest** has to say?
+
+## Getting more into the tool:
 
 ![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/8teleik9kxgyusxvhci8.png)
 
-Para que possamos executar o **Pitest** basta executar o seguinte comando no terminal do seu projeto:
+So that we can run **Pitest** just run the following command in your project's terminal:
 
 ```xml
 mvn org.pitest:pitest-maven:mutationCoverage
 
 ```
-Ou executar o plugin diretamente na sua IDE clicando na opção **pitest:mutationCoverage**, a escolha é sua :)
+
+Or run the plugin directly in your IDE by clicking on the **pitest:mutationCoverage** option, the choice is yours :)
 
 ![Captura de tela de 2021-03-16 23-41-57](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/h1ke2dm7umue1kxfbvbq.png)
 
-Após fazer a execução e tiver configurado direitinho o seu projeto até aqui, você irá ter o seguinte resultado:
+After executing the execution and having correctly configured your project so far, you will get the following result:
 
-![Captura de tela de 2021-03-16 23-51-46](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/xfv8gcr776fmuroanng5.png) 
- 
-Como podemos ver acima, o **Pitest** fez a geração de 5 mutações e com o nosso teste conseguimos matar apenas **3**, mas não se preocupe, para que você tenha uma visão mais analítica, o **Pitest** gera pra você um relatório, para que possamos acessar o mesmo basta seguir o seguinte caminho: 
-- target 
-- pit-reports 
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pt213dellzng60cqtb8i.png)
+
+As we can see above, the **Pitest** generated 5 mutations and with our test we managed to kill only **3**, but don't worry, so that you have a more analytical view, the **Pitest* * generates a report for you, so that we can access it, just follow the following path:
+
+- target
+- pit-reports
 - index.html
 
-![Captura de tela de 2021-03-16 23-54-32](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6vqjsjpsrlyi9g4aljuj.png)
 
-Como podemos ver, o **Pitest** tirou a nossa linha do user.setIdade(idade); e disse que se removermos a chamada dessa linha, o resultado será o mesmo e sabemos que isso não é verdade, correto? :) 
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7n3kullyohu6yahro7vk.png)
 
-Então agora basta voltarmos na nossa classe de teste e fazer as suas devidas alterações.
+As we can see, **Pitest** took our line from user.setYear(year); and said that if we remove the call from that line, the result will be the same and we know this is not true, correct? :)
 
-## Obrigado pessoal:
+So now we just go back to our test class and make the necessary changes.
+
+## Thank you guys:
 
 ![image](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/utjsstdcrxflznbq5mx9.png)
- 
-Agradeço a todos vocês por terem lido o meu artigo, como foi dito esse foi o primeiro de muitos que virão, então caso tenham gostado ou tenha um comentário para que possa estar me apoiando e me incentivando ficarei extremamente grato :)
 
-Agora deixo um desafio especial para que você execute o **Pitest** no seu projeto e diga qual foi a sua reação quando viu o resultado :D
+Thanks to all of you for reading my article, as I said this was the first of many to come, so if you liked it or have a comment so you can be supporting and encouraging me I will be extremely grateful :)
 
-**Observação:** Na minha primeira vez não foi muito positivo, mas me ajudou a ter uma qualidade maior nos projetos :D
+Now I leave a special challenge for you to run **Pitest** on your project and tell me what was your reaction when you saw the result :D
+
+**Note:** My first time was not very positive, but it helped me to have a higher quality in the projects :D
 
 - Linkedin: https://www.linkedin.com/in/gabriel-augusto-1b4914145/
 - Dev.to: https://dev.to/gabrielaugusto1996/testes-de-mutacao-garanta-ja-a-qualidade-do-seu-codigo-16gn
