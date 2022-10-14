@@ -102,7 +102,7 @@ Conforme foi dito anteriormente, devido à alguma correria ou até mesmo por fal
 
 - Após isso iremos fazer a instância da classe **Usuario** e iremos settar os parâmetros recebidos em seus respectivos atributos
 
-- Logo em seguida, iremos retornar o usuario
+- Logo em seguida, iremos retornar o user
 
 ```java
 public final class UsuarioTranslator {
@@ -110,12 +110,12 @@ public final class UsuarioTranslator {
     private UsuarioTranslator() {}
     
     public static Usuario of(final String nome, final Integer idade) {
-        final Usuario usuario = new Usuario();
+        final Usuario user = new Usuario();
         
-        usuario.setNome(nome);
-        usuario.setIdade(idade);
+        user.setNome(nome);
+        user.setIdade(idade);
         
-        return usuario;
+        return user;
     }
 }
 ```
@@ -129,16 +129,16 @@ class UsuarioTranslatorTest {
         final Integer idade = 10;
         final String nome = "Dudu";
 
-        final Usuario usuario = UsuarioTranslator.of(nome, idade);
+        final Usuario user = UsuarioTranslator.of(nome, idade);
 
-        Assertions.assertNotNull(usuario);
-        Assertions.assertEquals(nome, usuario.getNome());
+        Assertions.assertNotNull(user);
+        Assertions.assertEquals(nome, user.getNome());
     }
 }
 ```
 Como podemos ver, fizemos a chamada do método da nossa classe e fizemos as seguintes verificações:
 - Verificamos que o objeto de retorno não está nulo 
-- Verificamos que *nome** esperado é igual ao nome informado no **usuario**
+- Verificamos que *nome** esperado é igual ao nome informado no **user**
 
 Vamos conferir a nossa cobertura?
 
@@ -173,7 +173,7 @@ Como podemos ver acima, o **Pitest** fez a geração de 5 mutações e com o nos
 
 ![Captura de tela de 2021-03-16 23-54-32](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/6vqjsjpsrlyi9g4aljuj.png)
 
-Como podemos ver, o **Pitest** tirou a nossa linha do usuario.setIdade(idade); e disse que se removermos a chamada dessa linha, o resultado será o mesmo e sabemos que isso não é verdade, correto? :) 
+Como podemos ver, o **Pitest** tirou a nossa linha do user.setIdade(idade); e disse que se removermos a chamada dessa linha, o resultado será o mesmo e sabemos que isso não é verdade, correto? :) 
 
 Então agora basta voltarmos na nossa classe de teste e fazer as suas devidas alterações.
 

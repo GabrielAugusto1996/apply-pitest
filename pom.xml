@@ -8,11 +8,10 @@
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>br.com.aplicando.pitest</groupId>
-    <artifactId>aplicando-pitest</artifactId>
+    <groupId>com.apply.pitest</groupId>
+    <artifactId>apply-pitest</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>aplicando-pitest</name>
-    <description>Nesse projeto iremos fazer a aplicação do Pitest</description>
+    <name>apply-pitest</name>
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -67,10 +66,10 @@
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>br.com.aplicando.pitest.*</param>
+                        <param>com.apply.pitest.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>br.com.aplicando.pitest.*</param>
+                        <param>com.apply.pitest.*</param>
                     </targetTests>
                 </configuration>
             </plugin>
