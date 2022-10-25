@@ -1,4 +1,4 @@
-**Hello World**, welcome to my article related to mutation testing.
+**Hello World**, welcome to my article related to mutation testing!
 
 ## Special thanks:
 
